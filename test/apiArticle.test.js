@@ -2,7 +2,16 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
-const should = chai.should()
+const should = chai.should();
+const article = require('../models/articles');
+
+// describe('empty the database collection', () => {
+//   beforeEach((done) => { //Before each test we empty the database
+//       article.remove({}, (err) => {
+//          done();
+//       });
+//   });
+// })
 
 describe('post new article', function() {
   it('should store a new article to the database, and return the data back', function(done) {
