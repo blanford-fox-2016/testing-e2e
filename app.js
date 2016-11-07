@@ -8,7 +8,8 @@ const bodyParser = require('body-parser');
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
-const article = require('./routes/apiArticle')
+const article = require('./routes/apiArticle');
+const user = require('./routes/apiUser');
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api/article', article);
-app.use('/users', users);
+app.use('/api/user', user);
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1/test-blog', (err) => {
