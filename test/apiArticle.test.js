@@ -70,8 +70,9 @@ describe('find by slug, get the id, then update', function() {
     chai.request('http://localhost:3000')
       .get('/api/article/'+slug)
       .end(function (err, res) {
+        console.log(res.body._id);
         chai.request('http://localhost:3000')
-          .put('/api/article'+req.body._id)
+          .put('/api/article/'+res.body._id)
           .send({
             title: 'Hello World! Lalala',
             content: 'Hello World! Lorem ipsum dolor sit amet Lalala',
@@ -82,9 +83,11 @@ describe('find by slug, get the id, then update', function() {
             res.should.be.json;
             res.should.have.status(200);
             res.body.ok.should.equal(1);
-            res.body.nModified.equal(1);
-            res.body.n.equal(1);
-          })
+            res.body.nModified.should.equal(1);
+            res.body.n.should.equal(1);
+            done();
+          });
+
       })
   })
 })

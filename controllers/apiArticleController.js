@@ -39,7 +39,7 @@ let getSingleArticle = (req, res, next) => {
 
 let updateArticle = (req, res, next) => {
   article.update({
-    id: req.params.id
+    _id: req.params.id
   },{
     title: req.body.title,
     content: req.body.content,
@@ -57,5 +57,6 @@ let updateArticle = (req, res, next) => {
 module.exports= {
   allArticles: allArticles,
   postNewArticle: postNewArticle,
-  getSingleArticle: getSingleArticle
+  getSingleArticle: getSingleArticle,
+  updateArticle: updateArticle
 }
