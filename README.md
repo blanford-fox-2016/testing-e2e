@@ -22,7 +22,7 @@ The default host and port for development is `http://localhost:3000/`
 | Route | Method | Action |
 |-------|--------|--------|
 | /api/article/ | GET | Get all the article lists |
-| /api/article/:id | GET | Get the spesific article detail based on id|
+| /api/article/:slug | GET | Get the spesific article detail based on slug|
 | /api/article/ | POST | Post a new article |
 | /api/article/:id | PUT | Edit a single article based on id |
 | /api/article/:id | DELETE | Delete single article based on id |
