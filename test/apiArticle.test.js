@@ -1,6 +1,7 @@
 'use strict'
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
 const should = chai.should()
 
 describe('post new article', () => {
@@ -28,7 +29,7 @@ describe('post new article', () => {
 //Test script for get article lists
 describe('article list', () => {
   it('should return the respond json which contains the list of articles from database', (done) => {
-    chai.request('http://localhost:3000/')
+    chai.request('http://localhost:3000')
       .get('/api/article')
       .end((err, res) => {
         res.should.be.json;
