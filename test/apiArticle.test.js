@@ -44,7 +44,7 @@ describe('get single article by slug', function() {
   let slug = 'hello-world';
   it('should return a single article based on slug', function(done) {
     chai.request('http://localhost:3000')
-    .get('/api/article'+slug)
+    .get('/api/article/'+slug)
     .end(function (err, res) {
       res.should.be.json;
       res.should.have.status(200);
@@ -59,7 +59,7 @@ describe('find by slug, get the id, then update', function() {
   let slug = 'hello-world';
   it('should return status ok 1, nModified 1, modified 1', function(done) {
     chai.request('http://localhost:3000')
-      .get('/api/article'+slug)
+      .get('/api/article/'+slug)
       .end(function (err, res) {
         chai.request('http://localhost:3000')
           .put('/api/article'+req.body._id)
@@ -85,7 +85,7 @@ describe('find by slug, get the id, then delete', function() {
   let slug = 'hello-world';
   it('should return status ok 1, n 1', function(done) {
     chai.request('http://localhost:3000')
-      .get('/api/article'+slug)
+      .get('/api/article/'+slug)
       .end(function (err, res) {
         chai.request('http://localhost:3000')
           .delete('/api/article'+req.body._id)
