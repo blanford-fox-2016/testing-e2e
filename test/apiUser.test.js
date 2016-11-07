@@ -40,3 +40,38 @@ describe('get single user by username', function() {
     })
   })
 })
+
+describe('register a new user', function() {
+  it('should store a new user data to database and return a session', function(done) {
+    chai.request('http://localhost:3000')
+      .post('/api/user')
+      .send({
+        name: 'Septian Adhi Tama',
+        email: 'tama@tamatamvan.web.id',
+        username: 'tamatamvan',
+        password: 'tamatamvan'
+      })
+      .end(function(err, res) {
+        res.should.be.json;
+        res.should.have.status(200);
+        res.session.should.be.json;
+      })
+  })
+})
+
+
+describe('user login', function() {
+  it('should authenticate user, save a session if username and password correct according to database', function(done) {
+    chai.request('http://localhost:3000')
+      .post('/api/user/login')
+      .send({
+        username: 'tamatamvan',
+        password: 'tamatamvan'
+      })
+      .end(function(err, res) {
+        res.should.be.json;
+        res.should.have.status(200);
+        res.session.should.be.json;
+      })
+  })
+})
