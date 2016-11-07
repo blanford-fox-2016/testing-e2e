@@ -4,8 +4,8 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const should = chai.should()
 
-describe('post new article', () => {
-  it('should store a new article to the database, and return the data back', (done) => {
+describe('post new article', function() {
+  it('should store a new article to the database, and return the data back', function(done) {
     chai.request('http://localhost:3000')
       .post('/api/article')
       .send({
@@ -14,7 +14,7 @@ describe('post new article', () => {
         category: 'Tutorial',
         slug: 'hello-world'
       })
-      .end((err, res) => {
+      .end( function (err, res) {
         res.should.be.json;
         res.should.have.status(200);
         res.body.title.should.equal('Hello World!');
@@ -27,11 +27,11 @@ describe('post new article', () => {
 })
 
 //Test script for get article lists
-describe('article list', () => {
-  it('should return the respond json which contains the list of articles from database', (done) => {
+describe('article list', function() {
+  it('should return the respond json which contains the list of articles from database', function(done) {
     chai.request('http://localhost:3000')
       .get('/api/article')
-      .end((err, res) => {
+      .end(function (err, res) {
         res.should.be.json;
         res.should.have.status(200);
         done();
@@ -40,12 +40,12 @@ describe('article list', () => {
 })
 
 //get single article by slug
-describe('get single article by slug', () => {
+describe('get single article by slug', function() {
   let slug = 'hello-world';
-  it('should return a single article based on slug', (done) => {
+  it('should return a single article based on slug', function(done) {
     chai.request('http://localhost:3000')
     .get('/api/article'+slug)
-    .end((err, res) => {
+    .end(function (err, res) {
       res.should.be.json;
       res.should.have.status(200);
       res.body.slug.should.equal('hello-world');
@@ -55,12 +55,12 @@ describe('get single article by slug', () => {
 })
 
 //update single article by id
-describe('find by slug, get the id, then update', () => {
+describe('find by slug, get the id, then update', function() {
   let slug = 'hello-world';
-  it('should return status ok 1, nModified 1, modified 1', (done) => {
+  it('should return status ok 1, nModified 1, modified 1', function(done) {
     chai.request('http://localhost:3000')
       .get('/api/article'+slug)
-      .end((err, res) => {
+      .end(function (err, res) {
         chai.request('http://localhost:3000')
           .put('/api/article'+req.body._id)
           .send({
@@ -69,7 +69,7 @@ describe('find by slug, get the id, then update', () => {
             category: 'Tutorial',
             slug: 'hello-world'
           })
-          .end((err, res) =>{
+          .end(function (err, res){
             res.should.be.json;
             res.should.have.status(200);
             res.body.ok.should.equal(1);
@@ -81,15 +81,15 @@ describe('find by slug, get the id, then update', () => {
 })
 
 //delete single article by id
-describe('find by slug, get the id, then delete', () => {
+describe('find by slug, get the id, then delete', function() {
   let slug = 'hello-world';
-  it('should return status ok 1, n 1', (done) => {
+  it('should return status ok 1, n 1', function(done) {
     chai.request('http://localhost:3000')
       .get('/api/article'+slug)
-      .end((err, res) => {
+      .end(function (err, res) {
         chai.request('http://localhost:3000')
           .delete('/api/article'+req.body._id)
-          .end((err, res) =>{
+          .end(function (err, res){
             res.should.be.json;
             res.should.have.status(200);
             res.body.ok.should.equal(1);

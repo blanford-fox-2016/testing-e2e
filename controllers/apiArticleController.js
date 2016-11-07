@@ -20,12 +20,13 @@ let postNewArticle = (req, res, next) => {
     if (err) {
       console.log(err);
     } else {
-      res.json(artile);
+      res.json(article);
     }
   })
 }
 
 
 module.exports= {
-  allArticles: allArticles
+  allArticles: allArticles,
+  postNewArticle: postNewArticle
 }
