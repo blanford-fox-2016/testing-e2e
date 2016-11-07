@@ -43,8 +43,24 @@ let getSingleUser = (req, res, next) => {
   })
 }
 
+let login = (req, res, next) => {
+
+}
+let deleteUser = (req, res, next) => {
+  User.remove({
+    _id: req.params.id
+  }, (err, user) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(user)
+    }
+  })
+}
+
 module.exports = {
   allUsers: allUsers,
   register: register,
-  getSingleUser: getSingleUser
+  getSingleUser: getSingleUser,
+  deleteUser: deleteUser
 }
