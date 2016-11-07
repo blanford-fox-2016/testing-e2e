@@ -8,5 +8,6 @@ router.get('/', apiArticle.allArticles);
 router.post('/', apiArticle.postNewArticle);
 router.get('/:slug', apiArticle.getSingleArticle);
 router.put('/:id', apiArticle.updateArticle);
+router.delete('/:id', apiArticle.deleteArticle);
 
 module.exports = router;

@@ -100,12 +100,13 @@ describe('find by slug, get the id, then delete', function() {
       .get('/api/article/'+slug)
       .end(function (err, res) {
         chai.request('http://localhost:3000')
-          .delete('/api/article'+req.body._id)
+          .delete('/api/article/'+res.body._id)
           .end(function (err, res){
             res.should.be.json;
             res.should.have.status(200);
             res.body.ok.should.equal(1);
-            res.body.n.equal(1);
+            res.body.n.should.equal(1);
+            done();
           })
       })
   })

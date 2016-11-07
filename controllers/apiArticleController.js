@@ -54,9 +54,22 @@ let updateArticle = (req, res, next) => {
   })
 }
 
+let deleteArticle = (req, res, next) => {
+  article.remove({
+    _id: req.params.id
+  }, (err, article) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(article);
+    }
+  })
+}
+
 module.exports= {
   allArticles: allArticles,
   postNewArticle: postNewArticle,
   getSingleArticle: getSingleArticle,
-  updateArticle: updateArticle
+  updateArticle: updateArticle,
+  deleteArticle: deleteArticle
 }
