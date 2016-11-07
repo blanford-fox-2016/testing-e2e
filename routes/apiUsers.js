@@ -1,9 +1,15 @@
-var express = require('express');
-var router = express.Router();
+'use strict'
+const express = require('express');
+let router = express.Router();
+const apiUser = require('../controllers/apiUserController');
+const passport = require('passport');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+/* GET home page. */
+router.get('/', apiUser.allUsers);
+router.post('/', apiUser.register);
+// router.post('/login', passport.authenticate('local'), apiUser.login);
+router.get('/:username', apiUser.getSingleUser);
+// router.put('/:id', apiUser.updateUser);
+// router.delete('/:id', apiUser.deleteUser);
 
 module.exports = router;

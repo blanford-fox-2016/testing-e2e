@@ -6,7 +6,8 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const session = require('express-session');
+const User = require('./models/users');
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -24,10 +25,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//LOCAL STRATEGY
+passport.use(new LocalStrategy(User.authenticate()));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/api/article', article);
 app.use('/api/user', user);
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1/test-blog', (err) => {
