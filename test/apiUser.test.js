@@ -69,6 +69,7 @@ describe('user login', function() {
       .end(function(err, res) {
         res.should.be.json;
         res.should.have.status(200);
+        done();
       })
   })
 })
@@ -77,10 +78,15 @@ describe('edit user', function() {
   let username = 'tamatamvan';
   it("should update user's data with a new one based on id", function(done) {
     chai.request('http://localhost:3000')
-      .get('/api/article/'+username)
+      .get('/api/user/'+username)
       .end(function (err, res) {
         chai.request('http://localhost:3000')
-          .get('/api/article/'+res.body._id)
+          .put('/api/user/'+res.body._id)
+          .send({
+            name: 'Septian Adhi Tama',
+            email: 'tama@tamatamvan.web.id',
+            username: 'tamatamvan123'
+          })
           .end(function (err, res) {
             res.should.be.json;
             res.should.have.status(200);
@@ -93,7 +99,7 @@ describe('edit user', function() {
 })
 
 describe('delete user', function(){
-  let username = 'tamatamvan'
+  let username = 'tamatamvan123'
   it('should delete user data and return status ok 1, n 1', function(done) {
     chai.request('http://localhost:3000')
       .get('/api/user/'+username)

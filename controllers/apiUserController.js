@@ -44,8 +44,34 @@ let getSingleUser = (req, res, next) => {
 }
 
 let login = (req, res, next) => {
-
+  passport.authenticate('local', (err, user) => {
+    res.json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      username: user.username
+    })
+  })(req, res, next)
+  // res.json(res);
 }
+
+let updateUser = (req, res, next) => {
+  User.update({
+    _id: req.params.id
+  },
+  {
+    name: req.body.name,
+    email: req.body.email,
+    username: req.body.username
+  }, (err, user) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.json(user)
+    }
+  })
+}
+
 let deleteUser = (req, res, next) => {
   User.remove({
     _id: req.params.id
@@ -62,5 +88,7 @@ module.exports = {
   allUsers: allUsers,
   register: register,
   getSingleUser: getSingleUser,
-  deleteUser: deleteUser
+  deleteUser: deleteUser,
+  updateUser: updateUser,
+  login: login
 }

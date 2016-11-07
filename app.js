@@ -39,6 +39,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://127.0.0.1/test-blog', (err) => {
   if (err) {
     console.log(err);
